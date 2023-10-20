@@ -1,0 +1,47 @@
+`include "define.v"
+module data_mem(
+                 input clk,
+                 input write_enable,
+                 input read_enable,
+                 input[31:0] data_in,
+                 input[31:0] address,
+                 output[31:0] data_out,
+                 input[2:0] rw_type//000 ¶Á×Ö½Ú,·ûºÅÀ©Õ¹  001 ¶Á×Ö,·ûºÅÀ©Õ¹
+                                   //010 ¶ÁË«×Ö
+                                   //100 ¶Á×Ö½Ú£¬ÎŞ·ûºÅÀ©Õ¹   101 ¶Á×Ö£¬ÎŞ·ûºÅÀ©Õ¹  
+               );
+               reg[31:0] ram[255:0];
+               wire[31:0] read_data_prepare;                     
+               wire[31:0] read_data;
+               wire[31:0] data_b;//Ğ´
+               wire[31:0] data_w;
+               wire[31:0] rd_data_b;//¶Á
+               wire[31:0] rd_data_w;
+               wire[31:0] rd_data_final;
+               wire[31:0] data_out1;
+               
+               assign rd_data_b[31:8]=rw_type[2]?{24{1'b0}}:{24{data_in[7]}};
+               assign rd_data_w[31:16]=rw_type[2]?{16{1'b0}}:{16{data_in[15]}};
+               assign rd_data_b[7:0]=data_in[7:0];
+               assign rd_data_w[15:0]=data_in[15:0];
+               assign rd_data_final=(rw_type[1:0]==2'b00)?rd_data_b:
+                                    (rw_type[1:0]==2'b01)?rd_data_w:data_in;
+               
+               
+               assign read_data=data_in;
+               assign data_b[31:8]=rw_type[2]?{24{1'b0}}:{24{read_data[7]}};
+               assign data_w[31:16]=rw_type[2]?{16{1'b0}}:{16{read_data[15]}};
+               assign data_b[7:0]=read_data[7:0];
+               assign data_w[7:0]=read_data[15:0];
+               assign data_out1=(rw_type[1:0]==2'b00)?data_b:
+                               (rw_type[1:0]==2'b01)?data_w:read_data;
+               assign data_out=(read_enable)?data_out1:`zero_word;//²»ĞèÒª¶ÁÊ±ÖÃ0
+               
+               always@(posedge clk)
+               begin
+               		 if(write_enable)
+               		 begin
+               		 		 ram[address[9:2]]<=rd_data_final;
+               		 end
+               end
+endmodule
