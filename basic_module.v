@@ -84,9 +84,9 @@ module shifter(
               always@(*)
               begin
               		case(sh_order)
-              		2'b00:data_out<=data_in<<sh;//×óÒÆ
-              		2'b01:data_out<=data_in>>sh;//ÓÒÒÆ
-              		2'b10:data_out<=({32{data_in[31]}}<<sh)|(data_in>>sh);//ËãÊıÓÒÒÆ
+              		2'b00:data_out<=data_in<<sh;//å·¦ç§»
+              		2'b01:data_out<=data_in>>sh;//å³ç§»
+              		2'b10:data_out<=({32{data_in[31]}}<<sh)|(data_in>>sh);//ç®—æ•°å³ç§»
               		endcase
               end
 endmodule
@@ -94,7 +94,7 @@ endmodule
 module negative_num(
                      input[31:0] data_in,
                      output[31:0] data_out
-                   );//¸ºÊı
+                   );//è´Ÿæ•°
                    assign data_out=(~data_in)+1;
 endmodule
 

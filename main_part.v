@@ -2,17 +2,18 @@
 `include "decode.v"
 `include "gpr.v"
 `include "ALU.v"
+`include "judge.v"
 
 module main_part(
                   input clk,
                   input reset,
                   input[31:0] instr,
-                  input memtoreg,// Ñ¡Ôñalu_resultºÍRD_data
+                  input memtoreg,// é€‰æ‹©alu_resultå’ŒRD_data
                   input mux1,
                   input reg_write,
-                  input lui,//luiÖ¸Áî
-                  input U_type,//UĞÍÖ¸Áî
-                  input beq,//8ÖÖÌø×ªÌõ¼ş
+                  input lui,//luiæŒ‡ä»¤
+                  input U_type,//Uå‹æŒ‡ä»¤
+                  input beq,//8ç§è·³è½¬æ¡ä»¶
                   input bne,
                   input blt,
                   input bge,
@@ -21,15 +22,15 @@ module main_part(
                   input jal,
                   input jalr,
                   input[3:0] alu_order,
-                  input[31:0] RD_data,//Ö÷´æÊä³öÊı¾İ
+                  input[31:0] RD_data,//ä¸»å­˜è¾“å‡ºæ•°æ®
                   
                   output[7:0] ins_address,
-                  output[31:0] mem_datain,//Ö÷´æÊäÈëÊı¾İ
+                  output[31:0] mem_datain,//ä¸»å­˜è¾“å…¥æ•°æ®
                   output[31:0] alu_result,
                   output[6:0] opcode,
-                  output[2:0] func,//ALU²Ù×÷Ä£Ê½
-                  output func1//¼õ¡¢ËãÊõÓÒÒÆ
-                );//gpr¡¢aluÓëÄÚ²¿×ÜÏß
+                  output[2:0] func,//ALUæ“ä½œæ¨¡å¼
+                  output func1//å‡ã€ç®—æœ¯å³ç§»
+                );//gprã€aluä¸å†…éƒ¨æ€»çº¿
                 
                 wire   [31:0]pc_in;
 	              wire [31:0]pc_out;
@@ -37,7 +38,7 @@ module main_part(
 	              pc pc(.clk(clk),
 	                    .reset(reset),
 	                    .addr(pc_in),
-	                    .addr1(pc_out));//pc¼Ä´æÆ÷
+	                    .addr1(pc_out));//pcå¯„å­˜å™¨
 	                    
 	              wire [4:0]rs1;
 	              wire [4:0]rs2;
@@ -45,30 +46,30 @@ module main_part(
 								wire [31:0]imm;
 								decode decode(
 					               .ins(instr),
-					               .imm(imm),//Ã¿¸öÄ£Ê½µÄÁ¢¼´Êı
+					               .imm(imm),//æ¯ä¸ªæ¨¡å¼çš„ç«‹å³æ•°
 					               .rs1(rs1),
 					               .rs2(rs2),
 					               .rd(rd),
-					               .op(opcode),//Ç°7Î»²Ù×÷Êı
-					               .func(func),//ALUÄ£Ê½
-					               .func1(func1)//¼õ¡¢ËãÊõÓÒÒÆ
-					             );//½âÂëÆ÷
+					               .op(opcode),//å‰7ä½æ“ä½œæ•°
+					               .func(func),//ALUæ¨¡å¼
+					               .func1(func1)//å‡ã€ç®—æœ¯å³ç§»
+					             );//è§£ç å™¨
 					             
 					      wire [31:0] wr_reg_data;
 	              wire [31:0] rd_data1;
 	              wire [31:0] rd_data2;
 	              assign mem_datain=rd_data2;
 								gpr gpr(
-					            .reg_write(reg_write),//Ğ´Ê¹ÄÜ
+					            .reg_write(reg_write),//å†™ä½¿èƒ½
 					            .clk(clk),
 					            .reset(reset),
-					            .data_write(wr_reg_data),//Ğ´ÈëµÄÊı¾İ
+					            .data_write(wr_reg_data),//å†™å…¥çš„æ•°æ®
 					            .rd(rd),
 					            .rs1(rs1),
 					            .rs2(rs2),
 					            .read_data1(rd_data1),
 					            .read_data2(rd_data2)
-					          );//Í¨ÓÃ¼Ä´æÆ÷¶Ñ
+					          );//é€šç”¨å¯„å­˜å™¨å †
 					      
 					      wire[31:0] mux1_out;    
 					      mux mux1_a(
@@ -126,7 +127,7 @@ module main_part(
 					         wire[31:0] pc_jump;
 					         wire[31:0] pc_jump_order;
 					         wire[31:0] pc_jalr;
-					         assign pc_jalr={alu_result[31:1],1'b0};//set²¿·Ö
+					         assign pc_jalr={alu_result[31:1],1'b0};//setéƒ¨åˆ†
 					         mux jump_mux(
 					                       .data1(pc_jump),
 													       .data2(pc_order),
@@ -138,7 +139,7 @@ module main_part(
 													        .data2(pc_jump_order),
 													        .sel(jalr),
 													        .data_out(pc_in)
-					                      );//Á¬½ÓpcµÄÊäÈë²¿·Ö
+					                      );//è¿æ¥pcçš„è¾“å…¥éƒ¨åˆ†
 					         
 					         mux lui_mux(
 					                      .data1(imm),
@@ -151,7 +152,7 @@ module main_part(
 					                         .data2(w_r_d2),
 					                         .sel(U_type),
 					                         .data_out(wr_reg_data)
-					                       );//Á¬½ÓgprµÄÊäÈë²¿·Ö
+					                       );//è¿æ¥gprçš„è¾“å…¥éƒ¨åˆ†
 					         
 					         adder_32 pc_adder_4(
 					                            .cin(1'd0),

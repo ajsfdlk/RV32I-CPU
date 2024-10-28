@@ -4,7 +4,8 @@ module instr_mem(
                 );
                 reg[31:0] rom[255:0];
                 initial begin
-                    $readmemb("binary_code.txt",rom);
+                    //$readmemb("binary_code.txt",rom);
+                    $readmemh("code_buffer.txt",rom);
                 end
                 assign instr=rom[address];
 endmodule

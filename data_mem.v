@@ -6,15 +6,15 @@ module data_mem(
                  input[31:0] data_in,
                  input[31:0] address,
                  output[31:0] data_out,
-                 input[2:0] rw_type//000 ¶Á×Ö½Ú,·ûºÅÀ©Õ¹  001 ¶Á×Ö,·ûºÅÀ©Õ¹
-                                   //010 ¶ÁË«×Ö
-                                   //100 ¶Á×Ö½Ú£¬ÎŞ·ûºÅÀ©Õ¹   101 ¶Á×Ö£¬ÎŞ·ûºÅÀ©Õ¹
-                                   //000 ´æ×Ö½Ú
-                                   //001 ´æ×Ö
-                                   //010 ´æË«×Ö  
+                 input[2:0] rw_type//000 è¯»å­—èŠ‚,ç¬¦å·æ‰©å±•  001 è¯»å­—,ç¬¦å·æ‰©å±•
+                                   //010 è¯»åŒå­—
+                                   //100 è¯»å­—èŠ‚ï¼Œæ— ç¬¦å·æ‰©å±•   101 è¯»å­—ï¼Œæ— ç¬¦å·æ‰©å±•
+                                   //000 å­˜å­—èŠ‚
+                                   //001 å­˜å­—
+                                   //010 å­˜åŒå­—  
                );
                reg[31:0] ram[255:0];
-               wire[31:0] store_data;//×îÖÕ´æÈëµÄÊı¾İ
+               wire[31:0] store_data;//æœ€ç»ˆå­˜å…¥çš„æ•°æ®
                wire[31:0] output_data_prepare;
                store_control store_control(
 											                      .data_input(data_in),
@@ -60,7 +60,7 @@ module load_control(
                      input[2:0] rw_type,
                      output[31:0] output_data_final
                    );
-                   wire[31:0] data_b_ex;//·ûºÅÀ©Õ¹
+                   wire[31:0] data_b_ex;//ç¬¦å·æ‰©å±•
                    wire[31:0] data_w_ex;
                    wire[31:0] data_b;
                    wire[31:0] data_w;

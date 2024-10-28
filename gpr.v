@@ -1,7 +1,7 @@
 //2023.10.1
 `include "define.v"
 module gpr(
-            input reg_write,//Ð´Ê¹ÄÜ
+            input reg_write,//å†™ä½¿èƒ½
             input clk,
             input reset,
             input[31:0] data_write,
@@ -22,6 +22,6 @@ module gpr(
 		      end
 		      	
 
-		      assign read_data1=(rs1)?data_main[rs1]:`zero_word;//¼Ä´æÆ÷0µÄÖµÎª0
+		      assign read_data1=(rs1)?data_main[rs1]:`zero_word;//å¯„å­˜å™¨0çš„å€¼ä¸º0
 		      assign read_data2=(rs2)?data_main[rs2]:`zero_word;
 endmodule

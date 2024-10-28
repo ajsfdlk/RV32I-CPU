@@ -13,70 +13,70 @@ module centrol_core(
                      output[2:0] rw_type
                    );
                    wire[6:0] opcode;
-									 wire[2:0] func;
-									 wire func1;
-									 wire memtoreg;
-									 wire mux1;
-									 wire reg_write;
-									 wire lui;
-									 wire U_type;
-									 wire jal;
-									 wire jalr;
-									 wire beq;
-									 wire bne;
-									 wire blt;
-									 wire bge;
-									 wire bltu;
-									 wire bgeu;
-									 wire[3:0] alu_order;
-									 main_part main_part(
-											                  .clk(clk),
-											                  .reset(reset),
-											                  .instr(instr),
-											                  .memtoreg(memtoreg),// Ñ¡Ôñalu_resultºÍRD_data
-											                  .mux1(mux1),
-											                  .reg_write(reg_write),
-											                  .lui(lui),//luiÖ¸Áî
-											                  .U_type(U_type),//UĞÍÖ¸Áî
-											                  .beq(beq),//8ÖÖÌø×ªÌõ¼ş
-											                  .bne(bne),
-											                  .blt(blt),
-											                  .bge(bge),
-											                  .bltu(bltu),
-											                  .bgeu(bgeu),
-											                  .jal(jal),
-											                  .jalr(jalr),
-											                  .alu_order(alu_order),
-											                  .RD_data(RD_data),//Ö÷´æÊä³öÊı¾İ
-											                  
-											                  .ins_address(ins_address),
-											                  .mem_datain(mem_datain),//Ö÷´æÊäÈëÊı¾İ
-											                  .alu_result(address),
-											                  .opcode(opcode),
-											                  .func(func),//ALU²Ù×÷Ä£Ê½
-											                  .func1(func1)//¼õ¡¢ËãÊõÓÒÒÆ
-											                );//gpr¡¢aluÓëÄÚ²¿×ÜÏß
-						                
-						       top_controller top_controller(
-													                       .opcode(opcode),
-													                       .func(func),
-													                       .func1(func1),
-													                       .mem_read(r_enable),
-													                       .memtoreg(memtoreg),
-													                       .memwrite(w_enable),
-													                       .mux1(mux1),
-													                       .reg_write(reg_write),
-													                       .lui(lui),
-													                       .u_type(U_type),
-													                       .jal(jal),
-													                       .jalr(jalr),
-													                       .beq(beq),
-													                       .bne(bne),
-													                       .blt(blt),
-													                       .bge(bge),
-													                       .bltu(bltu),
-													                       .bgeu(bgeu),
-													                       .rw_type(rw_type),
-													                       .alu_order(alu_order)
-													                     ); 
+					wire[2:0] func;
+					wire func1;
+					wire memtoreg;
+					wire mux1;
+					wire reg_write;
+					wire lui;
+					wire U_type;
+					wire jal;
+					wire jalr;
+					wire beq;
+					wire bne;
+					wire blt;
+					wire bge;
+					wire bltu;
+					wire bgeu;
+					wire[3:0] alu_order;
+					main_part main_part(
+											.clk(clk),
+											.reset(reset),
+											.instr(instr),
+											.memtoreg(memtoreg),// é€‰æ‹©alu_resultå’ŒRD_data
+											.mux1(mux1),
+											.reg_write(reg_write),
+											.lui(lui),//luiæŒ‡ä»¤
+											.U_type(U_type),//Uå‹æŒ‡ä»¤
+											.beq(beq),//8ç§è·³è½¬æ¡ä»¶
+											.bne(bne),
+											.blt(blt),
+											.bge(bge),
+											.bltu(bltu),
+											.bgeu(bgeu),
+											.jal(jal),
+											.jalr(jalr),
+											.alu_order(alu_order),
+											.RD_data(RD_data),//ä¸»å­˜è¾“å‡ºæ•°æ®
+											
+											.ins_address(ins_address),
+											.mem_datain(mem_datain),//ä¸»å­˜è¾“å…¥æ•°æ®
+											.alu_result(address),
+											.opcode(opcode),
+											.func(func),//ALUæ“ä½œæ¨¡å¼
+											.func1(func1)//å‡ã€ç®—æœ¯å³ç§»
+										);//gprã€aluä¸å†…éƒ¨æ€»çº¿
+					
+			top_controller top_controller(
+														.opcode(opcode),
+														.func(func),
+														.func1(func1),
+														.mem_read(r_enable),
+														.memtoreg(memtoreg),
+														.memwrite(w_enable),
+														.mux1(mux1),
+														.reg_write(reg_write),
+														.lui(lui),
+														.u_type(U_type),
+														.jal(jal),
+														.jalr(jalr),
+														.beq(beq),
+														.bne(bne),
+														.blt(blt),
+														.bge(bge),
+														.bltu(bltu),
+														.bgeu(bgeu),
+														.rw_type(rw_type),
+														.alu_order(alu_order)
+														); 
 endmodule

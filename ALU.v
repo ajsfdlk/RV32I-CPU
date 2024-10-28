@@ -20,8 +20,8 @@ module alu(
           assign sh=d2[4:0];
           assign sh_order=alu_order[1:0];
           assign sel=(alu_order==`ALU_ADD)?1'b1:1'b0;
-          assign ul_res=add_cout;//无符号比大小
-          assign l_res=~adder_result[31];//有符号比大小
+          assign ul_res=add_cout;//鏃犵鍙锋瘮澶у皬
+          assign l_res=~adder_result[31];//鏈夌鍙锋瘮澶у皬
           negative_num neg_n(
 								             .data_in(d1),
 								             .data_out(neg_wire)
@@ -31,7 +31,7 @@ module alu(
 				                  .data2(neg_wire),
 				                  .sel(sel),
 				                  .data_out(adder_2)
-				                );//加减法的选择
+				                );//鍔犲噺娉曠殑閫夋嫨
 				  adder_32 add(
 				                .cin(1'b0),
 				                .data1(d2),

@@ -27,12 +27,12 @@ module top_controller(
                      main_control main_control(
 							                    .opcode(opcode),
 							                    .func(func),
-							                    .mem_read(mem_read),//Ö÷´æ¶ÁÊ¹ÄÜ
+							                    .mem_read(mem_read),//ä¸»å­˜è¯»ä½¿èƒ½
 							                    .memtoreg(memtoreg),
-							                    .alu_op(alu_op),//·¢¸øalu¿ØÖÆÆ÷µÄÃüÁî
-							                    .mem_write(memwrite),//Ö÷´æĞ´Ê¹ÄÜ
+							                    .alu_op(alu_op),//å‘ç»™aluæ§åˆ¶å™¨çš„å‘½ä»¤
+							                    .mem_write(memwrite),//ä¸»å­˜å†™ä½¿èƒ½
 							                    .mux1(mux1),
-							                    .reg_write(reg_write),//¼Ä´æÆ÷¶ÑĞ´Ê¹ÄÜ
+							                    .reg_write(reg_write),//å¯„å­˜å™¨å †å†™ä½¿èƒ½
 							                    .lui(lui),
 							                    .u_type(u_type),
 							                    .jal(jal),
@@ -43,13 +43,13 @@ module top_controller(
 							                    .bge(bge),
 							                    .bltu(bltu),
 							                    .bgeu(bgeu),
-							                    .rm_type(rw_type)//Ö÷´æµÄ5ÖÖ¼ÓÔØÀàĞÍ
+							                    .rm_type(rw_type)//ä¸»å­˜çš„5ç§åŠ è½½ç±»å‹
 							                  );
 							          alu_control alu_control(
 									                    .alu_op(alu_op),
-// 01IĞÍÖ¸Áî 10RĞÍÖ¸Áî 11Ìõ¼şÌø×ª(B) 00 R/I/B¶¼²»ÊÇ£¬ÒÔ¼Ó·¨´¦Àí
+// 01Iå‹æŒ‡ä»¤ 10Rå‹æŒ‡ä»¤ 11æ¡ä»¶è·³è½¬(B) 00 R/I/Béƒ½ä¸æ˜¯ï¼Œä»¥åŠ æ³•å¤„ç†
 									                    .func(func),
-									                    .func1(func1),//SRAIµÄÎª1 SLLIµÄÎª0
+									                    .func1(func1),//SRAIçš„ä¸º1 SLLIçš„ä¸º0
 									                    .alu_order(alu_order)
 									                  );
 endmodule

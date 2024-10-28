@@ -2,12 +2,12 @@
 module main_control(
                     input[6:0] opcode,
                     input[2:0] func,
-                    output mem_read,//主存读使能
+                    output mem_read,//????????
                     output memtoreg,
-                    output[1:0] alu_op,//发给alu控制器的命令
-                    output mem_write,//主存写使能
+                    output[1:0] alu_op,//????alu????????????
+                    output mem_write,//????д???
                     output mux1,
-                    output reg_write,//寄存器堆写使能
+                    output reg_write,//???????д???
                     output lui,
                     output u_type,
                     output jal,
@@ -18,14 +18,14 @@ module main_control(
                     output bge,
                     output bltu,
                     output bgeu,
-                    output[2:0] rm_type//主存的5种加载类型
-                  );//除alu外的控制器
+                    output[2:0] rm_type//?????5?????????
+                  );//??alu????????
                   wire[6:0] type_w;
-                  //从低到高b_type,r_type,i_type,u_type,load,store,auipc
+                  //??????b_type,r_type,i_type,u_type,load,store,auipc
                   assign type_w[0]=(opcode==`B_type)?1'b1:1'b0;
                   assign type_w[1]=(opcode==`R_type)?1'b1:1'b0;
                   assign type_w[2]=(opcode==`I_type)?1'b1:1'b0;
-                  assign type_w[3]=(lui|type_w[6])?1'b1:1'b0;//存立即数
+                  assign type_w[3]=(lui|type_w[6])?1'b1:1'b0;//????????
                   assign type_w[4]=(opcode==`load)?1'b1:1'b0;
                   assign type_w[5]=(opcode==`store)?1'b1:1'b0;
                   assign type_w[6]=(opcode==`auipc)?1'b1:1'b0;
@@ -41,15 +41,15 @@ module main_control(
 									assign bgeu= type_w[0] & (func==3'b111);
                   assign rm_type=func;
                   
-                  assign mem_read=type_w[4];//从存储器加载数据
-                  assign mem_write=type_w[5];//存储数据
-                  assign u_type=type_w[3];//存立即数
+                  assign mem_read=type_w[4];//??洢??????????
+                  assign mem_write=type_w[5];//?洢????
+                  assign u_type=type_w[3];//????????
                   assign reg_write=(jal|jalr|type_w[1]|type_w[2]|type_w[3]|type_w[4])?1'b1:1'b0;
-                  //所有需要存数据的取或
+                  //?????????????????
                   
                   assign mux1=jalr|type_w[5]|type_w[4]|type_w[2];
                   assign memtoreg=type_w[4];
                   assign alu_op[1]=type_w[0]|type_w[1];
                   assign alu_op[0]=type_w[2]|type_w[0];
-                  // 01I型指令 10R型指令 11条件跳转(B) 00 R/I/B都不是，以b2处理
+                  // 01I????? 10R????? 11???????(B) 00 R/I/B?????????b2????
 endmodule

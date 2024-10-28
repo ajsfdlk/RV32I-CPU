@@ -1,8 +1,8 @@
 `include "define.v"
 module alu_control(
-                    input[1:0] alu_op,// 01IĞÍÖ¸Áî 10RĞÍÖ¸Áî 11Ìõ¼şÌø×ª(B) 00 R/I/B¶¼²»ÊÇ£¬ÒÔb2´¦Àí
+                    input[1:0] alu_op,// 01Iå‹æŒ‡ä»¤ 10Rå‹æŒ‡ä»¤ 11æ¡ä»¶è·³è½¬(B) 00 R/I/Béƒ½ä¸æ˜¯ï¼Œä»¥b2å¤„ç†
                     input[2:0] func,
-                    input func1,//SRAIµÄÎª1 SLLIµÄÎª0
+                    input func1,//SRAIçš„ä¸º1 SLLIçš„ä¸º0
                     output[3:0] alu_order
                   );
                   reg[3:0] B_op;

@@ -62,7 +62,7 @@ module main_part(
 					            .reg_write(reg_write),//写使能
 					            .clk(clk),
 					            .reset(reset),
-					            .wr_reg_data(wr_reg_data),//写入的数据
+					            .data_write(wr_reg_data),//写入的数据
 					            .rd(rd),
 					            .rs1(rs1),
 					            .rs2(rs2),

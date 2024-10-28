@@ -2,13 +2,13 @@
 `include "define.v"
 module decode(
                input[31:0] ins,
-               output[31:0] imm,//Ã¿¸öÄ£Ê½µÄÁ¢¼´Êı
+               output[31:0] imm,//æ¯ä¸ªæ¨¡å¼çš„ç«‹å³æ•°
                output[4:0] rs1,
                output[4:0] rs2,
                output[4:0] rd,
-               output[6:0] op,//Ç°7Î»²Ù×÷Êı
-               output[2:0] func,//ALUÄ£Ê½
-               output func1//¼õ¡¢ËãÊõÓÒÒÆ
+               output[6:0] op,//å‰7ä½æ“ä½œæ•°
+               output[2:0] func,//ALUæ¨¡å¼ï¼ˆä¹Ÿå°±æ˜¯ä¸­é—´ä¸‰ä½çš„æ¨¡å¼é€‰æ‹©ï¼‰
+               output func1//å‡ã€ç®—æœ¯å³ç§»
              );
              assign func1=ins[30];
              assign op=ins[6:0];
@@ -23,24 +23,24 @@ endmodule
 module imm_count(
                 input[31:0] ins,
                 output[31:0] imm
-                );//¼ÆËãÁ¢¼´Êı
+                );//è®¡ç®—ç«‹å³æ•°
                 wire[6:0] op;
-                wire[4:0] mod;//5ÖÖÁ¢¼´ÊıµÄ´¦ÀíÄ£Ê½
+                wire[4:0] mod;//5ç§ç«‹å³æ•°çš„å¤„ç†æ¨¡å¼
                 wire[31:0] imm_i,imm_u,imm_j,imm_b,imm_s;
                 assign op=ins[6:0];
-                assign mod[0]=(op==`jalr)|(op==`load)|(op==`I_type);
-                assign mod[1]=(op==`lui)|(op==`auipc);
+                assign mod[0]=(op==`jalr)|(op==`load)|(op==`I_type);//I_typeï¼šç«‹å³æ•°è¿ç®—
+                assign mod[1]=(op==`lui)|(op==`auipc);//imm[31:12],ä½ä½è¡¥0
                 assign mod[2]=(op==`jal);
                 assign mod[3]=(op==`B_type);
                 assign mod[4]=(op==`store);
                 assign imm_i={{20{ins[31]}},ins[31:20]}; 
                 assign imm_u={ins[31:12],{12{1'b0}}};
-                assign imm_j={{12{ins[31]}},ins[19:12],ins[20],ins[30:21],1'b0};  
+                assign imm_j={{12{ins[31]}},ins[19:12],ins[20],ins[30:21],1'b0};//jå‹å’Œbå‹æœ€åä¸€ä½éƒ½æ˜¯0  
                 assign imm_b={{20{ins[31]}},ins[7],ins[30:25],ins[11:8],1'b0};
                 assign imm_s={{20{ins[31]}},ins[31:25],ins[11:7]};
                 assign imm=(mod[0])?imm_i:
                            (mod[1])?imm_u:
                            (mod[2])?imm_j:
                            (mod[3])?imm_b:
-                           (mod[4])?imm_s:`zero_word;//Ò»ÖÖĞÂµÄ¸³Öµ·½Ê½£¬´úÌæalways
+                           (mod[4])?imm_s:`zero_word;//ä¸€ç§æ–°çš„èµ‹å€¼æ–¹å¼ï¼Œä»£æ›¿always
 endmodule

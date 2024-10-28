@@ -8,8 +8,8 @@ module chip(
            );
            wire[7:0] ins_address;
            wire[31:0] instr;
-           wire[31:0] RD_data;//主存输出数据
-           wire[31:0] mem_datain;//主存输入数据
+           wire[31:0] RD_data;//涓诲瓨杈撳嚭鏁版嵁
+           wire[31:0] mem_datain;//涓诲瓨杈撳叆鏁版嵁
            wire w_enable;
            wire r_enable;
            wire[31:0] address;

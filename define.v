@@ -12,7 +12,7 @@
 `define		load			7'b0000011
 `define		store			7'b0100011
 `define		I_type			7'b0010011
-`define		R_type			7'b0110011
+`define		R_type			7'b0110011  //å¯„å­˜å™¨è¿ç®—
 
 `define 	ADD  			4'b0001
 `define 	SUB  			4'b0011
@@ -33,11 +33,11 @@
 `define ALU_OR      4'b0101
 `define ALU_XOR     4'b0110
 `define ALU_NOR     4'b0111
-`define ALU_UL      4'b1000   //ÎŞ·ûºÅĞ¡ÓÚÖÃÒ»
-`define ALU_L       4'b1001   //ÓĞ·ûºÅĞ¡ÓÚÖÃÒ»
-`define ALU_LL      4'b1100   //Âß¼­×óÒÆ
-`define ALU_LR      4'b1101   //Âß¼­ÓÒÒÆ
-`define ALU_CR      4'b1110   //ËãÊıÓÒÒÆ
+`define ALU_UL      4'b1000   //æ— ç¬¦å·å°äºç½®ä¸€
+`define ALU_L       4'b1001   //æœ‰ç¬¦å·å°äºç½®ä¸€
+`define ALU_LL      4'b1100   //é€»è¾‘å·¦ç§»
+`define ALU_LR      4'b1101   //é€»è¾‘å³ç§»
+`define ALU_CR      4'b1110   //ç®—æ•°å³ç§»
 
 
 `define mod0        7'b0000000

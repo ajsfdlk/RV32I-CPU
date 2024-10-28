@@ -12,5 +12,9 @@ module chip_tb;
         #80 reset<=0;
         #8000 $stop;
     end
+    initial begin            
+		    $dumpfile("wave.vcd");        //生成的vcd文件名称
+		    $dumpvars(0, chip_tb);    //tb模块名称
+    end
     always #10 clk<=~clk;
 endmodule 

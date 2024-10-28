@@ -10,7 +10,7 @@ module chip_tb;
     initial begin
         clk<=0;reset<=1;
         #80 reset<=0;
-        #6000 $stop;
+        #8000 $stop;
     end
     always #10 clk<=~clk;
 endmodule 
